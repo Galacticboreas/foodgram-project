@@ -1,5 +1,5 @@
 <div class="card" data-id="{{ recipe.id }}">
-    {% load recipes_filters %}
+    {% load main_filters %}
     {% load thumbnail %}
     {% if recipe.image %}
     {% thumbnail recipe.image '480x480' as img %}
