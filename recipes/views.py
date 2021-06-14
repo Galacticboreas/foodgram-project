@@ -13,7 +13,7 @@ from django.views.decorators.http import require_http_methods
 from recipes.forms import RecipeForm
 from recipes.models import (Ingredient, Recipe,
                          Favorite, Tag, ShopList, Follow)
-from recipes.utils import recipes_tags
+from recipes.utils import recipes_tags, pagination_pages
 
 User = get_user_model()
 
@@ -25,7 +25,7 @@ def get_page(request, filters, page_to_show, args_to_page):
     recipes = Recipe.objects.filter(**filters).filter(
         tags__value__in=tags).distinct()
     tags_list = Tag.objects.all()
-    paginator = Paginator(recipes, 9)
+    paginator = Paginator(recipes, pagination_pages)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, page_to_show, {
