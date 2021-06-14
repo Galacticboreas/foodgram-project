@@ -1,6 +1,6 @@
 from django import template
 
-from main.views import main_tags
+from recipes.views import recipes_tags
 
 register = template.Library()
 
@@ -9,7 +9,7 @@ register = template.Library()
 def make_tags(request, tag):
     new_request = request.GET.copy()
     if not request.GET.getlist('tags'):
-        tags_list = list(main_tags)
+        tags_list = list(recipes_tags)
     else:
         tags_list = new_request.getlist('tags')
     if tag.value in tags_list:

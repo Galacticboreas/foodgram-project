@@ -10,10 +10,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from main.forms import RecipeForm
-from main.models import (Ingredient, Recipe,
+from recipes.forms import RecipeForm
+from recipes.models import (Ingredient, Recipe,
                          Favorite, Tag, ShopList, Follow)
-from main.utils import main_tags
+from recipes.utils import recipes_tags
 
 User = get_user_model()
 
@@ -21,7 +21,7 @@ User = get_user_model()
 def get_page(request, filters, page_to_show, args_to_page):
     tags = request.GET.getlist('tags')
     if not tags:
-        tags = list(main_tags)
+        tags = list(recipes_tags)
     recipes = Recipe.objects.filter(**filters).filter(
         tags__value__in=tags).distinct()
     tags_list = Tag.objects.all()

@@ -6,7 +6,7 @@
 {% load static %}
 <link href="{% static './pages/single.css' %}" rel="stylesheet">
 {% endblock static %}
-{% load main_filters %}
+{% load recipes_filters %}
 <main class="main container">
     <div class="single-card" data-id={{ recipe.id }} data-author={{ recipe.author_id }}>
         {% if recipe.image %}

@@ -3,7 +3,7 @@
     <nav class="nav">
         <div class="nav__container container">
             {% if user.is_authenticated %}
-            {% load main_filters %}
+            {% load recipes_filters %}
             <ul class="nav__items list">
                 <li class="nav__item {% if request.resolver_match.url_name == 'index' %} nav__item_active {% endif %}"><a class="nav__link link"
                                                                                             href="{% url 'index' %}">Рецепты</a>

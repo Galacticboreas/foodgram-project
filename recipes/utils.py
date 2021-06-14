@@ -1,4 +1,4 @@
-main_tags = ['breakfast', 'lunch', 'dinner']
+recipes_tags = ['breakfast', 'lunch', 'dinner']
 
 
 def get_ingredients(request):
