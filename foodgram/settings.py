@@ -1,4 +1,8 @@
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -54,21 +58,15 @@ WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": os.environ.get("DB_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("DB_NAME", "foodgram"),
-        "USER": os.environ.get("POSTGRES_USER", "foodgram_user"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "foodgram_user_password"),
-        "HOST": os.environ.get("DB_HOST", "localhost"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
+        "ENGINE": env.get_value("DB_ENGINE"),
+        "NAME": env.get_value("DB_NAME"),
+        "USER": env.get_value("POSTGRES_USER"),
+        "PASSWORD": env.get_value("POSTGRES_PASSWORD"),
+        "HOST": env.get_value("DB_HOST"),
+        "PORT": env.get_value("DB_PORT"),
     }
 }
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-} '''
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
