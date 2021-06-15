@@ -1,6 +1,7 @@
 recipes_tags = ['breakfast', 'lunch', 'dinner']
 
-pagination_pages = 6
+pagination_pages_for_all = 6
+pagination_pages_for_my_subscriptions = 3
 
 
 def get_ingredients(request):
