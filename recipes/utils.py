@@ -1,3 +1,7 @@
+'''
+    Docstring
+'''
+
 RECIPES_TAGS = ['breakfast', 'lunch', 'dinner']
 
 PAGINATION_PAGES_FOR_ALL = 6
@@ -5,6 +9,9 @@ PAGINATION_PAGES_FOR_MY_SUBSCRIPTIONS = 3
 
 
 def get_ingredients(request):
+    '''
+        Docstring
+    '''
     ingredients = {}
     for key in request.POST:
         if key.startswith('nameIngredient'):

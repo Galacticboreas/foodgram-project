@@ -1,3 +1,7 @@
+'''
+    Docstring
+'''
+
 import csv
 import json
 
@@ -21,6 +25,9 @@ User = get_user_model()
 
 
 def get_tags(request):
+    '''
+        Docstring
+    '''
     tags = request.GET.getlist('tags')
     if not tags:
         tags = list(RECIPES_TAGS)
@@ -28,6 +35,9 @@ def get_tags(request):
 
 
 def get_page(request, filters, page_to_show, args_to_page):
+    '''
+        Docstring
+    '''
     tags = get_tags(request)
     recipes = Recipe.objects.filter(**filters).filter(
         tags__value__in=tags).distinct()
@@ -45,16 +55,25 @@ def get_page(request, filters, page_to_show, args_to_page):
 
 
 def index(request):
+    '''
+        Docstring
+    '''
     return get_page(request, {}, 'index.html', {})
 
 
 @login_required
 def my_favorites(request):
+    '''
+        Docstring
+    '''
     return get_page(request, {'favorite_recipes__user': request.user},
                     'favorite.html', {})
 
 
 def profile(request, author):
+    '''
+        Docstring
+    '''
     profile = get_object_or_404(User, username=author)
     return get_page(request, {'author': profile}, 'authorRecipe.html',
                     {'profile': profile})
@@ -62,6 +81,9 @@ def profile(request, author):
 
 @login_required
 def delete_recipe(request, username, recipe_id):
+    '''
+        Docstring
+    '''
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     if request.user != recipe.author:
         return redirect('recipe', username=username, recipe_id=recipe_id)
@@ -71,6 +93,9 @@ def delete_recipe(request, username, recipe_id):
 
 @login_required
 def new_recipe(request):
+    '''
+        Docstring
+    '''
     form = RecipeForm(request.POST or None, files=request.FILES or None)
     errors = []
     if form.is_valid():
@@ -92,6 +117,9 @@ def new_recipe(request):
 
 @login_required
 def recipe_edit(request, username, recipe_id):
+    '''
+        Docstring
+    '''
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     errors = []
     if request.user != recipe.author:
@@ -123,6 +151,9 @@ def recipe_edit(request, username, recipe_id):
 
 
 def recipe_view(request, username, recipe_id):
+    '''
+        Docstring
+    '''
     recipe = get_object_or_404(
         Recipe, pk=recipe_id
     )
@@ -130,6 +161,9 @@ def recipe_view(request, username, recipe_id):
 
 
 def ingredients(request):
+    '''
+        Docstring
+    '''
     text = request.GET.get('query')
     if text:
         ingr_list = list(Ingredient.objects.filter(
@@ -142,6 +176,9 @@ def ingredients(request):
 
 @login_required
 def shop_list(request):
+    '''
+        Docstring
+    '''
     if request.GET:
         recipe_id = request.GET.get('recipe_id')
         get_object_or_404(ShopList, user=request.user,
@@ -152,6 +189,9 @@ def shop_list(request):
 
 @login_required
 def get_purchases(request):
+    '''
+        Docstring
+    '''
     recipes = Recipe.objects.filter(shop_list__user=request.user)
     ingr = {}
     for recipe in recipes:
@@ -176,6 +216,9 @@ def get_purchases(request):
 
 @login_required
 def my_subscriptions(request):
+    '''
+        Docstring
+    '''
     subscriptions = User.objects.filter(
         following__user=request.user).annotate(recipe_count=Count('recipes'))
     all_recipes = {}
@@ -196,6 +239,9 @@ def my_subscriptions(request):
 @require_http_methods(['POST', 'DELETE'])
 @csrf_exempt
 def change_favorite(request, recipe_id=-1):
+    '''
+        Docstring
+    '''
     if request.method == 'POST':
         recipe_id = json.loads(request.body).get('id')
         recipe = get_object_or_404(Recipe, id=recipe_id)
@@ -213,6 +259,9 @@ def change_favorite(request, recipe_id=-1):
 @require_http_methods(['POST', 'DELETE'])
 @csrf_exempt
 def make_shoplist(request, recipe_id=-1):
+    '''
+        Docstring
+    '''
     if request.method == 'POST':
         recipe_id = json.loads(request.body).get('id')
         recipe = get_object_or_404(Recipe, id=recipe_id)
@@ -230,6 +279,9 @@ def make_shoplist(request, recipe_id=-1):
 @require_http_methods(['POST', 'DELETE'])
 @csrf_exempt
 def subscriptions(request, author_id=-1):
+    '''
+        Docstring
+    '''
     if request.method == 'POST':
         author_id = json.loads(request.body).get('id')
         author = get_object_or_404(User, id=author_id)

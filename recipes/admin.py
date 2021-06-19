@@ -1,3 +1,7 @@
+'''
+    Docstring
+'''
+
 from django.contrib import admin
 
 from recipes.models import (Recipe, Ingredient, Tag, Follow,
@@ -5,32 +9,53 @@ from recipes.models import (Recipe, Ingredient, Tag, Follow,
 
 
 class RecipeAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('title', 'author')
     list_filter = ('title',)
 
 
 class TagAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('title', 'value')
 
 
 class IngredientAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('title', 'dimension')
     list_filter = ('title',)
 
 
 class FollowAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('author', 'user')
 
 
 class FavoriteAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('user', 'recipe')
 
 
 class ShopListAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('user', 'recipe')
 
 
 class IngredientAmountAdmin(admin.ModelAdmin):
+    '''
+        Docstring
+    '''
     list_display = ('recipe', 'ingredient')
 
 

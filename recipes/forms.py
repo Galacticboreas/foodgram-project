@@ -1,3 +1,7 @@
+'''
+    Docstring
+'''
+
 from django.forms import ModelForm, CheckboxSelectMultiple
 from django.shortcuts import get_object_or_404
 
@@ -6,8 +10,14 @@ from .utils import get_ingredients
 
 
 class RecipeForm(ModelForm):
+    '''
+        Docstring
+    '''
 
     class Meta:
+        '''
+        Docstring
+        '''
         model = Recipe
         fields = ('text', 'title', 'tags', 'image', 'cooking_time')
         required = ('text', 'title')
@@ -16,6 +26,9 @@ class RecipeForm(ModelForm):
         }
 
     def save_recipe(self, request, new=True):
+        '''
+        Docstring
+        '''
         recipe = self.save(commit=False)
         recipe.author = request.user
         recipe.save()
