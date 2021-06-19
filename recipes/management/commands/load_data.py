@@ -1,9 +1,10 @@
+import csv
 from django.core.management.base import BaseCommand
 from recipes.models import Ingredient
-import csv
+
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Imports data into the ingredients model'
 
     def handle(self, *args, **options):
         with open('recipes/data/ingredients.csv') as file:

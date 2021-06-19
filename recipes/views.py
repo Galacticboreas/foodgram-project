@@ -13,8 +13,8 @@ from django.views.decorators.http import require_http_methods
 from recipes.forms import RecipeForm
 from recipes.models import (Ingredient, Recipe,
                          Favorite, Tag, ShopList, Follow)
-from recipes.utils import (recipes_tags, pagination_pages_for_all,
-                        pagination_pages_for_my_subscriptions)
+from recipes.utils import (RECIPES_TAGS, PAGINATION_PAGES_FOR_ALL,
+                        PAGINATION_PAGES_FOR_MY_SUBSCRIPTIONS)
 
 User = get_user_model()
 
@@ -22,11 +22,11 @@ User = get_user_model()
 def get_page(request, filters, page_to_show, args_to_page):
     tags = request.GET.getlist('tags')
     if not tags:
-        tags = list(recipes_tags)
+        tags = list(RECIPES_TAGS)
     recipes = Recipe.objects.filter(**filters).filter(
         tags__value__in=tags).distinct()
     tags_list = Tag.objects.all()
-    paginator = Paginator(recipes, pagination_pages_for_all)
+    paginator = Paginator(recipes, PAGINATION_PAGES_FOR_ALL)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, page_to_show, {
@@ -69,7 +69,7 @@ def new_recipe(request):
     errors = []
     if form.is_valid():
         recipe = form.save_recipe(request)
-        if recipe is not False:
+        if recipe:
             return redirect('recipe',
                             recipe_id=recipe.id,
                             username=request.user.username
@@ -99,7 +99,7 @@ def recipe_edit(request, username, recipe_id):
         instance=recipe)
     if form.is_valid():
         recipe = form.save_recipe(request, False)
-        if recipe is not False:
+        if recipe:
             return redirect(
                 'recipe',
                 recipe_id=recipe.id,
@@ -127,7 +127,8 @@ def ingredients(request):
     text = request.GET.get('query')
     if text:
         ingr_list = list(Ingredient.objects.filter(
-            title__istartswith=text).values())
+            title__istartswith=text).values('title', 'dimension'))
+        print(f'ingr_list - {ingr_list}')
         return JsonResponse(ingr_list, safe=False)
     else:
         raise ValueError('error: empty query')
@@ -174,7 +175,7 @@ def my_subscriptions(request):
     all_recipes = {}
     for sub in subscriptions:
         all_recipes[sub] = Recipe.objects.filter(author=sub)[:3]
-    paginator = Paginator(subscriptions, pagination_pages_for_my_subscriptions)
+    paginator = Paginator(subscriptions, PAGINATION_PAGES_FOR_MY_SUBSCRIPTIONS)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, 'myFollow.html', {

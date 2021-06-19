@@ -21,7 +21,7 @@
             <div class="card-user__body">
                 <ul class="card-user__items">
                     {% for author, recipes in all_recipes.items %}
-                    {% if author == subscription%}
+                    {% if author == subscription %}
                     {% for recipe in recipes %}
                     <li class="card-user__item">
                         <div class="recipe">
@@ -41,7 +41,7 @@
                             <p class="recipe__text"><span class="icon-time"></span> {{ recipe.cooking_time }} мин.</p>
                         </div>
                     </li>
-                    {% endfor%}
+                    {% endfor %}
                     {% endif %}
                     {% endfor %}
                     {% if subscription.recipe_count > 3 %}
@@ -57,7 +57,7 @@
         </div>
         {% endfor %}
     </div>
-    {% include 'includes/paginator.html' with items=page paginator=paginator%}
+    {% include 'includes/paginator.html' with items=page paginator=paginator %}
 </main>
 {% endblock content %}
 {% block js %}

@@ -1,7 +1,7 @@
-recipes_tags = ['breakfast', 'lunch', 'dinner']
+RECIPES_TAGS = ['breakfast', 'lunch', 'dinner']
 
-pagination_pages_for_all = 6
-pagination_pages_for_my_subscriptions = 3
+PAGINATION_PAGES_FOR_ALL = 6
+PAGINATION_PAGES_FOR_MY_SUBSCRIPTIONS = 3
 
 
 def get_ingredients(request):
@@ -11,4 +11,5 @@ def get_ingredients(request):
             ingr = key.split('_')[1]
             ingredients[request.POST[key]] = request.POST[
                 'valueIngredient_' + ingr]
+    print(f'ingredients: {ingredients}')
     return ingredients

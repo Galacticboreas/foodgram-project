@@ -6,6 +6,7 @@ from .utils import get_ingredients
 
 
 class RecipeForm(ModelForm):
+
     class Meta:
         model = Recipe
         fields = ('text', 'title', 'tags', 'image', 'cooking_time')
@@ -18,7 +19,7 @@ class RecipeForm(ModelForm):
         recipe = self.save(commit=False)
         recipe.author = request.user
         recipe.save()
-        if new is False:
+        if not new:
             recipe.recipe_amounts.all().delete()
         ingredients = get_ingredients(request)
         for title, quantity in ingredients.items():

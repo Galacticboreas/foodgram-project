@@ -1,6 +1,8 @@
 from django import template
 
-from recipes.views import recipes_tags
+from itertools import groupby
+
+from recipes.views import RECIPES_TAGS, new_recipe
 
 register = template.Library()
 
@@ -9,9 +11,10 @@ register = template.Library()
 def make_tags(request, tag):
     new_request = request.GET.copy()
     if not request.GET.getlist('tags'):
-        tags_list = list(recipes_tags)
+        tags_list = list(RECIPES_TAGS)
     else:
         tags_list = new_request.getlist('tags')
+    tags_list = [el for el, _ in groupby(tags_list)]
     if tag.value in tags_list:
         tags_list.remove(tag.value)
         new_request.setlist('tags', tags_list)

@@ -28,7 +28,7 @@
                     <a class="recipe__title" href="{% url 'recipe' username=recipe.author recipe_id=recipe.id %}">{{ recipe.title }}</a>
                     <p class="recipe__text"><span class="icon-time"></span> {{ recipe.cooking_time }} мин.</p>
                 </div>
-                <a class="shopping-list__button link" href="{% url 'shop_list' %}?recipe_id={{recipe.id}}">Удалить</a>
+                <a class="shopping-list__button link" href="{% url 'shop_list' %}?recipe_id={{ recipe.id }}">Удалить</a>
             </li>
             {% endfor %}
             {% else %}
