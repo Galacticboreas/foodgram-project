@@ -168,7 +168,6 @@ def ingredients(request):
     if text:
         ingr_list = list(Ingredient.objects.filter(
             title__istartswith=text).values('title', 'dimension'))
-        print(f'ingr_list - {ingr_list}')
         return JsonResponse(ingr_list, safe=False)
     else:
         raise ValueError('error: empty query')

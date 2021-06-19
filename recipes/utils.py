@@ -18,5 +18,4 @@ def get_ingredients(request):
             ingr = key.split('_')[1]
             ingredients[request.POST[key]] = request.POST[
                 'valueIngredient_' + ingr]
-    print(f'ingredients: {ingredients}')
     return ingredients
