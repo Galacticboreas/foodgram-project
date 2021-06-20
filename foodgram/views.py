@@ -1,14 +1,7 @@
-'''
-    Docstring
-'''
-
 from django.shortcuts import render
 
 
 def error404(request, exception):
-    '''
-        Docstring
-    '''
     text = '404. Страница которую вы ищете не найдена.'
     caption = '404'
     return render(request, 'errorPage.html',
@@ -16,9 +9,6 @@ def error404(request, exception):
 
 
 def error500(request):
-    '''
-        Docstring
-    '''
     text = '500. Мы не смогли обработать ваш запрос.'
     caption = '500'
     return render(request, 'errorPage.html',
