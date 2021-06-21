@@ -7,9 +7,9 @@ environ.Env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'bqvre@l0zap!fpqe7)jqcuhyag*98ia3t51u=squisq^004@$h'
 
-DEBUG = os.environ.get('DEBUG', default=False)
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
