@@ -19,10 +19,10 @@ User = get_user_model()
 
 
 def get_tags(request):
-    tags = request.GET.getlist('tags')
-    if not tags:
-        tags = list(RECIPES_TAGS)
-    return tags
+    tagss = request.GET.getlist('tags')
+    if not tagss:
+        tagss = list(RECIPES_TAGS)
+    return tagss
 
 
 def get_page(request, filters, page_to_show, args_to_page):
