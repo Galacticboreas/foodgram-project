@@ -186,7 +186,7 @@ def my_subscriptions(request):
         'page': page,
         'all_recipes': all_recipes,
     }
-                  )
+    )
 
 
 @login_required
@@ -204,6 +204,8 @@ def change_favorite(request, recipe_id=-1):
         removed = Favorite.objects.filter(user=request.user,
                                           recipe=recipe).delete()
         return JsonResponse({'success': removed})
+    else:
+        pass
 
 
 @login_required
@@ -221,6 +223,8 @@ def make_shoplist(request, recipe_id=-1):
         removed = ShopList.objects.filter(user=request.user,
                                           recipe=recipe).delete()
         return JsonResponse({'success': removed})
+    else:
+        pass
 
 
 @login_required
