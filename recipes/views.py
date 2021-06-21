@@ -208,7 +208,7 @@ def change_favorite(request, recipe_id=-1):
                                           recipe=recipe).delete()
         return JsonResponse({'success': removed})
     else:
-        pass
+        return
 
 
 @login_required
@@ -227,7 +227,7 @@ def make_shoplist(request, recipe_id=-1):
                                           recipe=recipe).delete()
         return JsonResponse({'success': removed})
     else:
-        pass
+        return
 
 
 @login_required
