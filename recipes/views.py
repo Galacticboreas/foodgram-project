@@ -17,19 +17,16 @@ from recipes.utils import (PAGINATION_PAGES_FOR_ALL,
 
 User = get_user_model()
 
-'''
+
 def get_tags(request):
     tags = request.GET.getlist('tags')
     if not tags:
         tags = list(RECIPES_TAGS)
-    return tags '''
+    return tags
 
 
 def get_page(request, filters, page_to_show, args_to_page):
-    tags = request.GET.getlist('tags')
-    if not tags:
-        tags = list(RECIPES_TAGS)
-    # tags = get_tags(request)
+    tags = get_tags(request)
     recipes = Recipe.objects.filter(**filters).filter(
         tags__value__in=tags).distinct()
     tags_list = Tag.objects.all()
