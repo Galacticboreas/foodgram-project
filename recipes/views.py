@@ -199,7 +199,7 @@ def change_favorite(request, recipe_id=-1):
         _, created = Favorite.objects.get_or_create(user=request.user,
                                                     recipe=recipe)
         return JsonResponse({'success': created})
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         recipe = get_object_or_404(Recipe, id=recipe_id)
         removed = Favorite.objects.filter(user=request.user,
                                           recipe=recipe).delete()
@@ -216,7 +216,7 @@ def make_shoplist(request, recipe_id=-1):
         _, created = ShopList.objects.get_or_create(user=request.user,
                                                     recipe=recipe)
         return JsonResponse({'success': created})
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         recipe = get_object_or_404(Recipe, id=recipe_id)
         removed = ShopList.objects.filter(user=request.user,
                                           recipe=recipe).delete()
