@@ -19,7 +19,7 @@ class RecipeForm(ModelForm):
         recipe = self.save(commit=False)
         recipe.author = request.user
         recipe.save()
-        if not new:
+        if new is False:
             recipe.recipe_amounts.all().delete()
         ingredients = get_ingredients(request)
         for title, quantity in ingredients.items():
