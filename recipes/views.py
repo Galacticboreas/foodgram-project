@@ -73,7 +73,7 @@ def new_recipe(request):
     errors = []
     if form.is_valid():
         recipe = form.save_recipe(request)
-        if recipe:
+        if recipe is not False:
             return redirect('recipe',
                             recipe_id=recipe.id,
                             username=request.user.username
@@ -103,8 +103,7 @@ def recipe_edit(request, username, recipe_id):
         instance=recipe)
     if form.is_valid():
         recipe = form.save_recipe(request, False)
-        if recipe:
-            print(f'redirect recipe {recipe}')
+        if recipe is not False:
             return redirect(
                 'recipe',
                 recipe_id=recipe.id,
