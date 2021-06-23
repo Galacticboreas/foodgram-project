@@ -24,7 +24,7 @@ class RecipeForm(ModelForm):
         ingredients = get_ingredients(request)
         for title, quantity in ingredients.items():
             if int(quantity) < 1:
-                return False
+                quantity = abs(quantity)
             ingredient = get_object_or_404(Ingredient, title=title)
             amount = IngredientAmount(
                 recipe=recipe,
