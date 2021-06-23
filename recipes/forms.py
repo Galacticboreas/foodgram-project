@@ -19,12 +19,12 @@ class RecipeForm(ModelForm):
         recipe = self.save(commit=False)
         recipe.author = request.user
         recipe.save()
-        if new is False:
+        if not new:
             recipe.recipe_amounts.all().delete()
         ingredients = get_ingredients(request)
         for title, quantity in ingredients.items():
             if int(quantity) < 1:
-                quantity = abs(quantity)
+                return False
             ingredient = get_object_or_404(Ingredient, title=title)
             amount = IngredientAmount(
                 recipe=recipe,
