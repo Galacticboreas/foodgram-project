@@ -115,6 +115,7 @@ def recipe_edit(request, username, recipe_id):
 
     texts = {'title': 'Редактирование рецепта',
              'save_button': 'Сохранить рецепт', 'errors': errors}
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
     return render(request, 'formRecipe.html',
                   {'form': form, 'recipe': recipe,
                    'texts': texts, 'edit': True})
