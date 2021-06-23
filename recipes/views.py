@@ -104,6 +104,7 @@ def recipe_edit(request, username, recipe_id):
     if form.is_valid():
         recipe = form.save_recipe(request, False)
         if recipe:
+            print(f'redirect recipe {recipe}')
             return redirect(
                 'recipe',
                 recipe_id=recipe.id,
