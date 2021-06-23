@@ -85,7 +85,7 @@ def new_recipe(request):
     texts = {'title': 'Создание рецепта', 'save_button': 'Создать рецепт',
              'errors': errors}
     return render(request, 'formRecipe.html', {'form': form,
-                                               'texts': texts, 'edit': False})
+                                               'texts': texts, 'edit': True})
 
 
 @login_required
